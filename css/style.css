@@ -1,11 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap');
 :root {
   --bgColor: rgb(36, 36, 36);
   --borderWidth: 2px;
   --baseColor: 24, 228, 255;
   --borderColor: rgb(var(--baseColor));
   --boxShadowColor: rgb(var(--baseColor), 0.6);
+  --glassDisplay: rgba(0, 55, 105, 0.3);
   --squaresBgColor: rgb(75, 75, 75);
   --yellow: #FFCA00;
   --theLight: #a83b10;
@@ -24,7 +26,8 @@ body {
   color: rgb(53, 53, 53);
   margin: 0;
   /* font-family: 'Raleway', sans-serif; */
-  font-family: 'IBM Plex Mono', monospace;
+  /* font-family: 'IBM Plex Mono', monospace; */
+  font-family: 'Major Mono Display', monospace;
   height: 200vh;
   cursor: url(../img/crosshair.png) 16 16, crosshair;
   -webkit-cursor: url(../img/crosshair.png) 16 16, crosshair;
@@ -148,21 +151,34 @@ p {
   position: fixed;
   box-sizing: border-box;
   color: var(--yellow);
+  color: var(--borderColor);
   padding: 1rem;
   background-color: rgba(var(--baseColor), 0.121);
+  background-color: var(--glassDisplay);
   border: 1px solid rgb(var(--baseColor));
   transform-style: flat;
   transition: 1s;
 }
+@keyframes slideDownObjective {
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
 .objective {
   width: fit-content;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(-100%);
   border-radius: 0 0 1rem 1rem;
   border-top: none;
+  /* animation: slideDownObjective 1s forwards; */
 }
 .objective p, .gatheredIntel p {
   margin: 0;
+}
+@keyframes slideUpIntel {
+  to {
+    transform: translateY(0);
+  }
 }
 .gatheredIntel {
   white-space: nowrap;
@@ -172,6 +188,8 @@ p {
   left: 1%;
   border-radius: 1rem 1rem 0 0;
   border-bottom: none;
+  transform: translateY(100%);
+  /* animation: slideUpIntel 1s forwards; */
 }
 .intelProfilePic::after {
   content: '';
@@ -187,6 +205,7 @@ p {
 }
 .intelProfilePic {
   display: inline-block;
+  cursor: default;
   height: 10rem;
   width: 7rem;
   background-image: url(../img/oscar-dfp-exp-3.svg);
