@@ -1,23 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500;700;900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;400;700&display=swap');
 :root {
   --bgColor: rgb(36, 36, 36);
   --borderWidth: 2px;
-  --borderColor: rgb(89, 124, 219);
+  --baseColor: 24, 228, 255;
+  --borderColor: rgb(var(--baseColor));
+  --boxShadowColor: rgb(var(--baseColor), 0.6);
+  --squaresBgColor: rgb(75, 75, 75);
+  --yellow: #FFCA00;
+  --theLight: #a83b10;
   --top: 50%;
   --cardWidth: 440px;
   --cardHeight: 240px;
   font-size: 16px;
+  line-height: 1.5;
 }
 html, body {
   overscroll-behavior: none;
   -webkit-overscroll-behavior: none;
 }
 body {
-  background-color: var(--bgColor);
+  background-color: #000;
   color: rgb(53, 53, 53);
   margin: 0;
-  font-family: 'Raleway', sans-serif;
+  /* font-family: 'Raleway', sans-serif; */
+  font-family: 'IBM Plex Mono', monospace;
   height: 200vh;
+  cursor: url(../img/crosshair.png) 16 16, crosshair;
+  -webkit-cursor: url(../img/crosshair.png) 16 16, crosshair;
+  -moz-cursor: url(../img/crosshair.png) 16 16, crosshair;
 }
 /* hide scrollbar */
 body::-webkit-scrollbar {
@@ -30,23 +41,50 @@ body {
 h1, h2, p {
   all: unset;
   display: block;
-  padding: 0 .66rem;
 }
 h1 {
+  line-height: 2.2rem;
   font-size: 2rem;
-  font-weight: 900;
+  font-weight: 700;
 }
 h2 {
   font-size: 1.35rem;
-  font-weight: 700;
-  padding-bottom: 1rem;
+  font-weight: 400;
+  margin-bottom: 1.65rem;
 }
 p {
-  font-size: 1.19rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 200;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 }
-#fullScreenWrapper {
+.startScreen {
   position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bgColor);
+  cursor: default;
+}
+.startGameBtn {
+  all: unset;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 5px outset var(--borderColor);
+  border-radius: 1rem;
+  background-color: rgba(var(--baseColor), 0.9);
+  color: var(--bgColor);
+  padding: 1rem;
+  cursor: pointer;
+}
+.startGameBtn:active:focus {
+  border: 5px inset var(--borderColor);
+  padding: calc(1rem + 5px) calc(1rem - 5px) calc(1rem - 5px) calc(1rem + 5px);
+}
+#space3d {
+  position: fixed;
+  background-image: radial-gradient(transparent, 90%, var(--theLight));
   width: 100vw;
   height: 100vh;
   perspective: 350px;
@@ -63,65 +101,130 @@ p {
   width: .5rem;
   height: .5rem;
   opacity: 0;
-  background-image: url(../img/oscar-dfp-exp-3.svg);
+  /* background-image: url(../img/oscar-dfp-exp-3.svg); */
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+  /* filter: brightness(.3); */
   transition: 1s;
 }
+.flyingOscar {
+  background-image: url(../img/oscar-dfp-exp-3.svg);
+}
+.flyingFlag {
+  background-image: url(../img/blankFlag.svg);
+}
+.flyingEmail {
+  background-image: url(../img/email.svg);
+}
+.flyingName {
+  background-image: url(../img/olLogo.svg);
+}
+.flyingSkillset {
+  background-image: url(../img/skills.svg);
+}
 @keyframes flyFlyAway {
-  to {
+  50% {
+    opacity: 1;
+  }
+  100% {
     opacity: 1;
     transform: translateZ(350px);
   }
 }
 .timeToFly {
-  animation: flyFlyAway 10s linear;
+  animation: flyFlyAway 7s cubic-bezier(1,.69,.96,.84);
 }
-.textContentWrapper {
+@keyframes scoreBigAni {
+  to {
+    opacity: 0;
+    transform: translateY(200%) translateX(-200%) scale(.1);
+  }
+}
+.scoreBigAni {
+  animation: scoreBigAni .5s forwards .5s;
+}
+.textContent {
   position: fixed;
   box-sizing: border-box;
-  color: rgb(0, 253, 135);
+  color: var(--yellow);
   padding: 1rem;
-  background-color: rgba(0, 253, 135, 0.021);
-  border: 1px solid rgb(0, 253, 135);
-  border-radius: 1rem;
-  width: var(--cardWidth);
-  height: var(--cardHeight);
-  top: var(--top);
-  left: 50%;
-  transform-style: preserve-3d;
+  background-color: rgba(var(--baseColor), 0.121);
+  border: 1px solid rgb(var(--baseColor));
+  transform-style: flat;
   transition: 1s;
-  transform: translate(-50%, -50%) translateZ(-100px);
 }
-.moveForward {
-  transform: translate(-50%, -50%) translateZ(0px);
+.objective {
+  width: fit-content;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 1rem 1rem;
+  border-top: none;
 }
-#textContent {
+.objective p, .gatheredIntel p {
+  margin: 0;
+}
+.gatheredIntel {
   white-space: nowrap;
+  width: 40rem;
+  height: fit-content;
+  bottom: 0;
+  left: 1%;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: none;
 }
-.cardHeadline {
-  display: flex;
-  justify-content: space-between;
+.intelProfilePic::after {
+  content: '';
+  position: absolute;
+  top: .5rem;
+  right: 0rem;
+  width: 1rem;
+  height: 1rem;
+  background-image: var(--checkmarkUrl);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(4deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  75% {
-    transform: rotate(-4deg);
-  }
+.intelProfilePic {
+  display: inline-block;
+  height: 10rem;
+  width: 7rem;
+  background-image: url(../img/oscar-dfp-exp-3.svg);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0);
 }
-.coverup {
+#intelEmail, #intelFrom, #intelSkillset, #intelName {
+  position: relative;
+}
+#intelEmail::after, #intelFrom::after, #intelSkillset::after, #intelName::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -1.5rem;
+  width: 1rem;
+  height: 1rem;
+  background-image: var(--checkmarkUrl);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.intelTable {
+  display: inline-block;
+}
+.intelTable tr > td:last-child {
+  font-weight: 200;
+  width: 20rem;
+  cursor: text;
+}
+.intelTable th {
+  text-align: left;
+}
+/* .coverup {
   position: fixed;
   font-weight: 700;
-  color: #FFCA00;
+  color: #000000;
   word-wrap: break-word;
   overflow: hidden;
   width: calc(var(--cardWidth) / 2);
@@ -135,72 +238,23 @@ p {
   left: 50%;
   transform: translate(-100%, -100%);
   transform-origin: top left;
-  border-right: var(--borderWidth) solid var(--borderColor);
-  border-bottom: var(--borderWidth) solid var(--borderColor);
-}
-.coverUpTopLeft h1 {
-  text-align: right;
-  padding: 0 .66rem;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-.coverUpTopRight {
-  top: var(--top);
-  left: 50%;
-  transform: translate(0%, -100%);
-  transform-origin: top right;
-  border-left: var(--borderWidth) solid var(--borderColor);
-  border-bottom: var(--borderWidth) solid var(--borderColor);
-}
-.coverUpBottomRight {
-  top: var(--top);
-  left: 50%;
-  transform-origin: bottom right;
-  border-left: var(--borderWidth) solid var(--borderColor);
-  border-top: var(--borderWidth) solid var(--borderColor);
-}
-.coverUpBottomLeft {
-  top: var(--top);
-  left: 50%;
-  transform: translate(-100%, 0%);
-  transform-origin: bottom left;
-  border-right: var(--borderWidth) solid var(--borderColor);
-  border-top: var(--borderWidth) solid var(--borderColor);
+  border-right: var(--borderWidth) solid #000;
+  border-bottom: var(--borderWidth) solid #000;
 }
 .moveUpLeft {
   transform: translate(-100%, -100%) rotate3d(0.7, -1.3, 0, 80deg) translateZ(50px);
-  box-shadow: 100px 100px 40px rgba(0, 162, 255, 0.226);
-  background-color: rgb(75, 75, 75);
+  background-color: var(--squaresBgColor);
   opacity: .5;
   color: rgba(255, 204, 0, 0);
-}
-.moveUpRight {
-  transform: translate(0%, -100%) rotate3d(0.7, 1.3, 0, 80deg) translateZ(50px);
-  box-shadow: -100px 100px 40px rgba(0, 162, 255, 0.226);
-  background-color: rgb(75, 75, 75);
-  opacity: .5;
-}
-.moveDownRight {
-  transform: translate(0%, 0%) rotate3d(-0.7, 1.3, 0, 80deg) translateZ(50px);
-  box-shadow: -100px -100px 40px rgba(0, 162, 255, 0.226);
-  background-color: rgb(75, 75, 75);
-  opacity: .5;
-  color: rgba(255, 204, 0, 0);
-}
-.moveDownLeft {
-  transform: translate(-100%, 0%) rotate3d(-0.7, -1.3, 0, 80deg) translateZ(50px);
-  box-shadow: 100px -100px 40px rgba(0, 162, 255, 0.226);
-  background-color: rgb(75, 75, 75);
-  opacity: .5;
-}
+} */
 @media only screen and (max-width: 560px) {
   :root {
     --cardWidth: 80vw;
     --cardHeight: calc(var(--cardWidth) * 0.5454545455);
-    font-size: 3.5vw;
+    font-size: 2.4vw;
   }
-  .coverUpBottomRight h1 {
-    font-size: 6vw;
+  .gatheredIntel {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
