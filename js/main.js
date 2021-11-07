@@ -1,5 +1,10 @@
+const metas = document.getElementsByTagName('meta');
+
 const startScreen = document.querySelector('.startScreen');
 const startGameBtn = document.querySelector('.startGameBtn');
+
+const objectiveDiv = document.querySelector('.objective');
+const gatheredIntelDiv = document.querySelector('.gatheredIntel');
 
 let addClass = true;
 let flyingObjId = 0;
@@ -19,6 +24,13 @@ startGameBtn.addEventListener('click', e => {
   }, 200);
 
   startScreen.remove();
+
+  metas["theme-color"].content =
+  metas["msapplication-navbutton-color"].content =
+  metas["apple-mobile-web-app-status-bar-style"].content = '#000000';
+
+  objectiveDiv.style.animation = 'slideDownObjective 1s forwards';
+  gatheredIntelDiv.style.animation = 'slideUpIntel 1s forwards 1.3s';
 })
 
 const flyingObjectsDiv = document.querySelector('.flyingObjects');
@@ -57,7 +69,7 @@ flyingObjectsDiv.addEventListener('click', e => {
     case 'flyingFlag':
       let from = document.querySelector('#intelFrom');
       setTimeout(() => {
-        from.innerText = 'SWE 🇸🇪';
+        from.innerText = 'swe 🇸🇪';
         from.style.setProperty('--checkmarkUrl', checkMarkUrl);
       }, 1000)
       e.target.style.filter = 'opacity(0)';
@@ -79,7 +91,7 @@ flyingObjectsDiv.addEventListener('click', e => {
       case 'flyingName':
       let name = document.querySelector('#intelName');
       setTimeout(() => {
-        name.innerText = 'Oscar Lundberg';
+        name.innerText = 'oscar lundberg';
         name.style.setProperty('--checkmarkUrl', checkMarkUrl);
       }, 1000)
       e.target.style.filter = 'opacity(0)';
@@ -90,7 +102,7 @@ flyingObjectsDiv.addEventListener('click', e => {
       case 'flyingSkillset':
       let skillset = document.querySelector('#intelSkillset');
       setTimeout(() => {
-        skillset.innerText = 'Frontend developer';
+        skillset.innerText = 'frontend developer';
         skillset.style.setProperty('--checkmarkUrl', checkMarkUrl);
       }, 1000)
       e.target.style.filter = 'opacity(0)';
