@@ -118,8 +118,8 @@ function makeBig(bgImageClass) {
   let scoreBigDiv = document.createElement('div');
   scoreBigDiv.classList.add(bgImageClass);
   scoreBigDiv.classList.add('imFlying');
-  scoreBigDiv.style.width = '20vw';
-  scoreBigDiv.style.height = '20vh';
+  scoreBigDiv.style.width = '30vw';
+  scoreBigDiv.style.height = '30vh';
   scoreBigDiv.style.opacity = 1;
   scoreBigDiv.style.top = '50vh';
   scoreBigDiv.style.left = '50vw';
