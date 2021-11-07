@@ -272,8 +272,13 @@ p {
     --cardHeight: calc(var(--cardWidth) * 0.5454545455);
     font-size: 2.4vw;
   }
+  @keyframes slideUpIntel {
+    to {
+      transform: translateX(-50%) translateY(0);
+    }
+  }
   .gatheredIntel {
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(100%);
   }
 }
