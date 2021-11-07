@@ -8,22 +8,42 @@
   <title>Oscar L, Frontend Dev</title>
 </head>
 <body>
-  <div id="fullScreenWrapper">
+  <div id="space3d">
     <div class="flyingObjects"></div>
-    <div class="textContentWrapper">
-      <div id="textContent">
-        <div class="cardHeadline">
-          <h1>Oscar Lundberg</h1>
-          <h1>🇸🇪</h1>
-        </div>
-        <h2>Frontend developer</h2>
-        <p>oscarlundberg@hotmail.com</p>
-      </div>
-    </div>
-    <div class="coverup coverUpTopLeft"><h1>👋😊</h1></div>
-    <div class="coverup coverUpTopRight"></div>
-    <div class="coverup coverUpBottomLeft"></div>
-    <div class="coverup coverUpBottomRight"><h1>scroll<br/>down<br/>plz</h1></div>
+  </div>
+  <div class="textContent objective">
+    <p><b>Objective:</b> catch flying info</p>
+  </div>
+  <div class="textContent gatheredIntel">
+    <div class="intelProfilePic"></div>
+    <table class="intelTable">
+      <thead>
+        <th colspan="2"><h2><b>Gathered intel</b></h2></th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><p>NAME:</p></td>
+          <td><p id="intelName">-</p></td>
+        </tr>
+        <tr>
+          <td><p>SKILLSET:</p></td>
+          <td><p id="intelSkillset">-</p></td>
+        </tr>
+        <tr>
+          <td><p>FROM:</p></td>
+          <td><p id="intelFrom">-</p></td>
+        </tr>
+        <tr>
+          <td><p>EMAIL:</p></td>
+          <td><p id="intelEmail">-</p></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="startScreen">
+    <button class="startGameBtn">
+      <h1>Play</h1>
+    </button>
   </div>
   <script src="js/main.js"></script>
 </body>
